@@ -31,6 +31,10 @@ public class TeamBean {
     private String status;
     private List<Team> teams;
     
+    private String teamName;
+    private String liaisonId;
+    private String courseCode;
+    
     
     /**
      * Creates a new instance of TeamBean
@@ -53,9 +57,33 @@ public class TeamBean {
     public void setTeams(List<Team> teams) {
         this.teams = teams;
     }
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
+    }
+
+    public String getLiaisonId() {
+        return liaisonId;
+    }
+
+    public void setLiaisonId(String liaisonId) {
+        this.liaisonId = liaisonId;
+    }
+
+    public String getCourseCode() {
+        return courseCode;
+    }
+
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
+    }
     
     public void createTeam(){
-        Team team = new Team(UUID.randomUUID().toString());
+        Team team = new Team(UUID.randomUUID().toString(), teamName, liaisonId, courseCode);
         try {
             persist(team);
             setStatus("Created.");

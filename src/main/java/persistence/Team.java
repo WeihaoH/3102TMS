@@ -22,7 +22,7 @@ public class Team implements Serializable {
     private String teamId;
     private String teamName;
     private Date creationDate;
-    private String Liaison;
+    private String liaison;
     //private List<UserAccount> teamMembers;
     //private List<Integer> papameters;
     private String courseCode;
@@ -35,10 +35,12 @@ public class Team implements Serializable {
     
     }
 
-    public Team(String id) {
+    public Team(String id, String teamName, String liaison, String courseCode) {
         this.teamId = id;
         setCreationDate(new Date());
-        
+        setCourseCode(courseCode);
+        setliaison(liaison);
+        setTeamName(teamName);
     }
 
 //    public List getTeamMembers() {
@@ -105,12 +107,12 @@ public class Team implements Serializable {
         this.courseCode = courseCode;
     }
 
-    public String getLiaison() {
-        return Liaison;
+    public String getliaison() {
+        return liaison;
     }
 
-    public void setLiaison(String Liaison) {
-        this.Liaison = Liaison;
+    public void setliaison(String liaison) {
+        this.liaison = liaison;
     }
 
     public boolean isIsFull() {
