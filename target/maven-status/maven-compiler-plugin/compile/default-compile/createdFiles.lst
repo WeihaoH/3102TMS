@@ -2,6 +2,9 @@ filters\AuthenticationFilter.class
 persistence\UserAccount.class
 TMS\war\beans\SignInBean.class
 TMS\war\beans\LoginBean.class
+TMS\war\beans\TeamBean.class
 persistence\UserTeamRelation.class
 persistence\UserTeamRelation_.class
+persistence\Team.class
+persistence\Team_.class
 persistence\UserAccount_.class
