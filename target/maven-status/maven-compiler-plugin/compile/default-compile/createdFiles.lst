@@ -1,0 +1,4 @@
+filters\AuthenticationFilter.class
+TMS\war\beans\SignInBean.class
+persistence\UserAccount.class
+TMS\war\beans\LoginBean.class
