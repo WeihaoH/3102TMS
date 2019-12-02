@@ -92,10 +92,12 @@ public class LoginBean {
                      HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
                      if(acc.getRole().equals("student")){
                         session.setAttribute("Student", acc);
-                        FacesContext.getCurrentInstance().getExternalContext().redirect("/TMS-web/faces/student/operationInterface.xhtml");
+                        System.out.println("TMS.war.beans.LoginBean.Login()");
+                        FacesContext.getCurrentInstance().getExternalContext().redirect("/3102TMS/faces/student/operationInterface.xhtml");
                      }else{
+                        System.out.println("TMS.war.beans.LoginBean.Login()");
                         session.setAttribute("Teacher", acc);
-                        FacesContext.getCurrentInstance().getExternalContext().redirect("/TMS-web/faces/teacher/operationInterface.xhtml");
+                        FacesContext.getCurrentInstance().getExternalContext().redirect("/3102TMS/faces/teacher/operationInterface.xhtml");
                      }                  
                      status="Login Successful - " + "Welcome " + acc.getFirstname(); 
                  } else {
