@@ -145,7 +145,7 @@ public class Team implements Serializable {
 
     @Override
     public String toString() {
-        return "TMS.ejb.persistence.Team[ id = " + teamId + " ]";
+        return "3102TMS.persistence.Team[ id = " + teamId + " ]";
     }
 
 }

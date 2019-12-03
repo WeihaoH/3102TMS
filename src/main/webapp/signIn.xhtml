@@ -13,46 +13,46 @@
                 <h1>Create New Account...</h1>
                 <f:view>
                     <h:form>
-                    <h:panelGrid columns="3">
-                    <h:outputText value="User Id"></h:outputText>
-                    <h:inputText id="id" value="#{signInBean.userId}" required="true" requiredMessage="Please enter User Id">
-                    </h:inputText>
-                    <h:message id="idMsg" for="id" errorStyle="color:red; display:block"/>
-                    <h:outputText value="First Name"></h:outputText>
-                    <h:inputText id="fname" value="#{signInBean.firstname}" required="true" requiredMessage="Please enter First Name">
-                    </h:inputText>
-                    <h:message id="fnameMsg" for="fname" errorStyle="color:red; display:block" styleClass="errorMessage"/>
-                    <h:outputText value="Last Name"></h:outputText>
-                    <h:inputText id="lname" value="#{signInBean.lastname}" required="true" requiredMessage="Please enter Last Name">
-                    </h:inputText>
-                    <h:message id="lnameMsg" for="lname" errorStyle="color:red; display:block" styleClass="errorMessage"/>
-                    <h:outputText value="Role"></h:outputText>
-                    
-                    <h:selectOneMenu id="usertype" value="#{signInBean.roletype}">
-                        <f:selectItems value="#{signInBean.roleVal}"></f:selectItems>                    
-                    </h:selectOneMenu>
-                    <br/>
-                    <h:outputText value="Email"></h:outputText>
-                    <h:inputText id="uemail" value="#{signInBean.email}" required="true" requiredMessage="Please enter email">
-                    </h:inputText>
-                    <h:message id="uemailMsg" for="uemail" errorStyle="color:red; display:block" styleClass="errorMessage"/>
-                    
-                    <h:outputText value="Password"></h:outputText>
-                    <h:inputSecret id="passwd" value="#{signInBean.password}" required="true" requiredMessage="Please enter Password">
-                    </h:inputSecret>
-                    <h:message id="passwdMsg" for="passwd" errorStyle="color:red; display:block" styleClass="errorMessage"/>
-                    </h:panelGrid>
-                <h:commandButton value="Add" type="command"  actionListener="#{signInBean.addUser}">
-                   <f:ajax execute="id fname lname usertype uemail passwd" 
-                           render="status idMsg fnameMsg lnameMsg  uemailMsg passwdMsg"/>
-                </h:commandButton>
-                <h:commandButton value="Cancel" type="reset" />
-                
-                <div>
-                    <hr/>
-                    <hr/>
-                <h:outputText  style="color:royalblue; font-size: large; font-weight: bold" id="status" value="#{signInBean.status}"/>
-                </div>
+                        <h:panelGrid columns="3">
+                            <h:outputText value="User Id"></h:outputText>
+                            <h:inputText id="id" value="#{signInBean.userId}" required="true" requiredMessage="Please enter User Id">
+                            </h:inputText>
+                            <h:message id="idMsg" for="id" errorStyle="color:red; display:block"/>
+                            <h:outputText value="First Name"></h:outputText>
+                            <h:inputText id="fname" value="#{signInBean.firstname}" required="true" requiredMessage="Please enter First Name">
+                            </h:inputText>
+                            <h:message id="fnameMsg" for="fname" errorStyle="color:red; display:block" styleClass="errorMessage"/>
+                            <h:outputText value="Last Name"></h:outputText>
+                            <h:inputText id="lname" value="#{signInBean.lastname}" required="true" requiredMessage="Please enter Last Name">
+                            </h:inputText>
+                            <h:message id="lnameMsg" for="lname" errorStyle="color:red; display:block" styleClass="errorMessage"/>
+                            <h:outputText value="Role"></h:outputText>
+
+                            <h:selectOneMenu id="usertype" value="#{signInBean.roletype}">
+                                <f:selectItems value="#{signInBean.roleVal}"></f:selectItems>                    
+                            </h:selectOneMenu>
+                            <br/>
+                            <h:outputText value="Email"></h:outputText>
+                            <h:inputText id="uemail" value="#{signInBean.email}" required="true" requiredMessage="Please enter email">
+                            </h:inputText>
+                            <h:message id="uemailMsg" for="uemail" errorStyle="color:red; display:block" styleClass="errorMessage"/>
+
+                            <h:outputText value="Password"></h:outputText>
+                            <h:inputSecret id="passwd" value="#{signInBean.password}" required="true" requiredMessage="Please enter Password">
+                            </h:inputSecret>
+                            <h:message id="passwdMsg" for="passwd" errorStyle="color:red; display:block" styleClass="errorMessage"/>
+                        </h:panelGrid>
+                        <h:commandButton value="Add" type="command"  actionListener="#{signInBean.addUser}">
+                            <f:ajax execute="id fname lname usertype uemail passwd" 
+                                    render="status idMsg fnameMsg lnameMsg  uemailMsg passwdMsg"/>
+                        </h:commandButton>
+                        <h:commandButton value="Cancel" type="reset" />
+
+                        <div>
+                            <hr/>
+                            <hr/>
+                            <h:outputText  style="color:royalblue; font-size: large; font-weight: bold" id="status" value="#{signInBean.status}"/>
+                        </div>
                     </h:form>
                 </f:view>
 
