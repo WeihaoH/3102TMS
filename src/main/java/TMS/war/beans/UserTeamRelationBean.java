@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -103,8 +104,12 @@ public class UserTeamRelationBean implements Serializable{
             Query query = em.createQuery(
                 "DELETE FROM TeamCandidaterRal t WHERE t.teamid = :teamId AND t.candidaterid = :candidaterId");
             query.setParameter("teamId",tId).setParameter("candidaterId", uId).executeUpdate();           
-            utx.commit();           
-       
+            utx.commit(); 
+            
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            TeamCandidaterBean teamCandidaterBean = (TeamCandidaterBean) facesContext.getApplication().createValueBinding("#{teamCandidaterBean}").getValue(facesContext);
+            teamCandidaterBean.findAllCandidater(tId);
+            
         setStatus("New Student accepted.");
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", e);
