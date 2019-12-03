@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./../template.xhtml">
+
+            <ui:define name="content">
+                <h1>Set up parameter...</h1>
+                <f:view>
+                    <h:form>
+                    <h:panelGrid columns="3">
+                    <h:outputText value="Assignment Name"></h:outputText>
+                    <h:inputText id="aName" value="#{assignmentBean.assignmentName}" required="true" requiredMessage="Please enter Assignment Name">
+                    </h:inputText>
+                    <h:message id="aNameMsg" for="aName" errorStyle="color:red; display:block"/>
+                    <h:outputText value="Assignment Id"></h:outputText>
+                    <h:inputText id="aId" value="#{assignmentBean.assignmentId}" required="true" requiredMessage="Please enter Assignment Id">
+                    </h:inputText>
+                    <h:message id="aIdMsg" for="aId" errorStyle="color:red; display:block" styleClass="errorMessage"/>
+                    <h:outputText value="Minimum Size of Team"></h:outputText>
+                    <h:inputText id="aMinSize" value="#{assignmentBean.minSizeOfTeam}" required="true" requiredMessage="Please enter the Minimum Size of Team">
+                    </h:inputText>
+                    <h:message id="aMinSizeMsg" for="aMinSize" errorStyle="color:red; display:block" styleClass="errorMessage"/>
+                    <h:outputText value="Maximum Size of Team"></h:outputText>
+                    <h:inputText id="aMaxSize" value="#{assignmentBean.maxSizeOfTeam}" required="true" requiredMessage="Please enter the Maximum Size of Team">
+                    </h:inputText>
+                    <h:message id="aMaxSizeMsg" for="aMaxSize" errorStyle="color:red; display:block" styleClass="errorMessage"/>
+                    
+                    </h:panelGrid>
+                <h:commandButton value="Set up" type="command" actionListener="#{assignmentBean.setParameter}">
+                   <f:ajax execute="aName aId aMinSize aMaxSize" 
+                           render="aNameMsg aIdMsg aMinSizeMsg aMaxSizeMsg"/>
+                </h:commandButton>
+                <h:commandButton value="Reset" type="reset" />
+                
+                <div>
+                    <hr/>
+                    <hr/>
+                <h:outputText  style="color:royalblue; font-size: large; font-weight: bold" id="status" value="#{assignmentBean.status}"/> 
+                </div>
+                    </h:form>
+                </f:view>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
