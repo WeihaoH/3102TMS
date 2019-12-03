@@ -99,15 +99,11 @@ public class TeamBean {
             FacesContext facesContext = FacesContext.getCurrentInstance();
             UserTeamRelationBean userTeamRelationBean = (UserTeamRelationBean) facesContext.getApplication().createValueBinding("#{userTeamRelationBean}").getValue(facesContext);
             userTeamRelationBean.addMembertoTeam(team.getId(), userAcc.getUserId());
-            //我觉得需要加上Team-TeamParameter的relation
-            try {
-            Query query = em.createQuery("SELECT p FROM TeamParameter p WHERE p.courseCode = :courseCode",TeamParameter.class);
-            TeamParameter teamPara = (TeamParameter) query.setParameter("courseCode", courseCode).getSingleResult();
+
+            Query query = em.createQuery("SELECT p FROM TeamParameter p WHERE p.courseCode = '"+courseCode+"'",TeamParameter.class);
+            TeamParameter teamPara = (TeamParameter) query.getSingleResult();
             TeamParameterRelationBean teamParameterRelationBean = (TeamParameterRelationBean)facesContext.getApplication().createValueBinding("#{teamParameterRelationBean}").getValue(facesContext);
             teamParameterRelationBean.addTeamToCourse(team.getId(),teamPara.getParameterId());    
-            } catch (Exception e) {
-            System.err.println(e);
-            }
    
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", e);

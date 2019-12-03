@@ -64,10 +64,8 @@ public class TeamCandidaterBean {
         }
     }
     
-    
-    
-    public void addMembertoTeam(){
-        System.out.println("We are here");
+
+    public void addMembertoTeam(String teamid, String userid){
         UserTeamRelation utr = new UserTeamRelation();
         utr.setUuid(UUID.randomUUID().toString());
         utr.setTeamid(teamid);
