@@ -107,22 +107,30 @@ public class TeamBean implements Serializable{
     }
 
     public void createTeam() {
-        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        UserAccount userAcc = (UserAccount) session.getAttribute("Student");
-        Team team = new Team(UUID.randomUUID().toString(), teamName, userAcc.getUserId(), courseCode);
+        
         try {
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            UserTeamRelationBean userTeamRelationBean = (UserTeamRelationBean) facesContext.getApplication().createValueBinding("#{userTeamRelationBean}").getValue(facesContext);
+            
+            Query query = em.createQuery("SELECT p FROM TeamParameter p WHERE p.courseCode = '"+courseCode+"'",TeamParameter.class);
+            TeamParameter teamPara = (TeamParameter) query.getSingleResult();
+            
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+            UserAccount userAcc = (UserAccount) session.getAttribute("Student");
+            Team team = new Team(UUID.randomUUID().toString(), teamName, userAcc.getUserId(), courseCode);
             persist(team);
             setStatus("Created.");
             System.out.println(userAcc.getUserId());
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            UserTeamRelationBean userTeamRelationBean = (UserTeamRelationBean) facesContext.getApplication().createValueBinding("#{userTeamRelationBean}").getValue(facesContext);
-            userTeamRelationBean.addMembertoTeam(team.getId(), userAcc.getUserId());
 
-            Query query = em.createQuery("SELECT p FROM TeamParameter p WHERE p.courseCode = '"+courseCode+"'",TeamParameter.class);
-            TeamParameter teamPara = (TeamParameter) query.getSingleResult();
+            
             TeamParameterRelationBean teamParameterRelationBean = (TeamParameterRelationBean)facesContext.getApplication().createValueBinding("#{teamParameterRelationBean}").getValue(facesContext);
+            userTeamRelationBean.addMembertoTeam(team.getId(), userAcc.getUserId());
+            
             teamParameterRelationBean.addTeamToCourse(team.getId(),teamPara.getParameterId());    
    
+            
+
+
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", e);
             setStatus("Creation failed.");
