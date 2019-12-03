@@ -16,6 +16,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import persistence.TeamCandidaterRal;
 import persistence.TeamParameter;
 import persistence.UserAccount;
 import persistence.UserTeamRelation;
@@ -94,23 +95,18 @@ public class UserTeamRelationBean implements Serializable{
         persist(utr);
     }
     
-     public void addMembertoTeam(){
-        UserTeamRelation utr = new UserTeamRelation();
-        utr.setUuid(UUID.randomUUID().toString());
-        utr.setUserid(uid);
-        utr.setTeamid(teamid);
-        persist(utr);
-     }
     
-        public void acceptStudent(String uId, String tId){
-        
+        public void acceptStudent(String tId,String uId){
+        addMembertoTeam(tId,uId);
         try{
-        UserTeamRelation newJoin = new UserTeamRelation();
-        newJoin.setUuid(UUID.randomUUID().toString());
-        
-        //在前端显示并获取uid和teamid，放到这个bean的uid和teamid里
-        
-        addMembertoTeam(uId,tId);
+            Query query = em.createNativeQuery(
+                "DELETE FROM TeamCandidaterRal t" +
+                " WHERE t.teamid = :teamId AND t.candidaterid = candidaterId");
+            query.setParameter("teamId",tId);
+            query.setParameter("candidaterId",uId);
+            query.executeUpdate();           
+                         
+       
         setStatus("New Student accepted.");
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", e);
@@ -118,7 +114,6 @@ public class UserTeamRelationBean implements Serializable{
             }
         }
         
-        //不确定放在哪个bean里，先放在这儿
         public void showTeamMembers(){
             try{
             Query query = em.createQuery("SELECT u FROM UserTeamRelation u WHERE u.teamid = '"+this.teamid+"'",UserTeamRelation.class);

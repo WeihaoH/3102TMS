@@ -9,12 +9,14 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.Date;
+import javax.persistence.Table;
 
 /**
  *
  * @author RoyLiu
  */
 @Entity
+@Table(name="Team7952021")
 public class Team implements Serializable {
 
     private static final long serialVersionUID = 1L;

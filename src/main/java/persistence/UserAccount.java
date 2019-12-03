@@ -14,12 +14,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.Table;
 
 /**
  *
  * @author 73987
  */
 @Entity
+@Table(name="UserAccount7952021")
 public class UserAccount implements Serializable {
 
   private static long serialVersionUID = 1L;
