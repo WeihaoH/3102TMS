@@ -44,7 +44,6 @@ public class SignInBean {
     private javax.transaction.UserTransaction utx;
     
     private String status;
-    //private TMSBean tms;
 
     
     
