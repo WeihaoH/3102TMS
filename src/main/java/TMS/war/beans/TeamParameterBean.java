@@ -5,6 +5,7 @@
  */
 package TMS.war.beans;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -66,12 +67,20 @@ public class TeamParameterBean {
         this.maxSizeOfTeam = maxSizeOfTeam;
     }
 
-    public Date getFormDeadline() {
-        return formDeadline;
+    public String getFormDeadline() {
+        if (formDeadline != null) {
+            return formDeadline.toString();
+        } else {
+            return null;
+        }       
     }
 
-    public void setFormDeadline(Date formDeadline) {
-        this.formDeadline = formDeadline;
+    public void setFormDeadline(String formDeadline) {
+        try {
+            this.formDeadline = new SimpleDateFormat("yyyy-MM-dd").parse(formDeadline);
+        } catch (Exception e) {
+            System.err.println("Error in form deadline:" + e);
+        }
     }
 
     public String getStatus() {
@@ -108,8 +117,9 @@ public class TeamParameterBean {
     
     public void setParameter(){
         try {
-            TeamParameter teamParameter = new TeamParameter(UUID.randomUUID().toString());
-            teamParameter.setParameterId(teamParameterId);
+            String id = UUID.randomUUID().toString();
+            System.out.println(id);
+            TeamParameter teamParameter = new TeamParameter(id);
             teamParameter.setCourseCode(courseCode);
             teamParameter.setFormDeadline(formDeadline);
             teamParameter.setMinSizeOfTeam(minSizeOfTeam);

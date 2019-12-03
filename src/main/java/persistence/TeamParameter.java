@@ -21,9 +21,8 @@ public class TeamParameter implements Serializable {
 
  private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String courseCode;
     private String parameterId;
+    private String courseCode;
     private int minSizeOfTeam;
     private int maxSizeOfTeam;
     private Date formDeadline;
@@ -98,6 +97,6 @@ public class TeamParameter implements Serializable {
 
     @Override
     public String toString() {
-        return "persistence.Assignment[ id=" + parameterId + " ]";
+        return "persistence.TeamParameter[ id=" + parameterId + " ]";
     }
 }

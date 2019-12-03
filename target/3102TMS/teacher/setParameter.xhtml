@@ -18,10 +18,6 @@
                     <h:inputText id="cCode" value="#{teamParameterBean.courseCode}" required="true" requiredMessage="Please enter Course Code">
                     </h:inputText>
                     <h:message id="cCodeMsg" for="cCode" errorStyle="color:red; display:block"/>
-<!--                    <h:outputText value="Assignment Id"></h:outputText>
-                    <h:inputText id="aId" value="#{teamParameterBean.assignmentId}" required="true" requiredMessage="Please enter Assignment Id">
-                    </h:inputText>
-                    <h:message id="aIdMsg" for="aId" errorStyle="color:red; display:block" styleClass="errorMessage"/>-->
                     <h:outputText value="Minimum Size of Team"></h:outputText>
                     <h:inputText id="cMinSize" value="#{teamParameterBean.minSizeOfTeam}" required="true" requiredMessage="Please enter the Minimum Size of Team">
                     </h:inputText>
@@ -30,15 +26,15 @@
                     <h:inputText id="cMaxSize" value="#{teamParameterBean.maxSizeOfTeam}" required="true" requiredMessage="Please enter the Maximum Size of Team">
                     </h:inputText>
                     <h:message id="cMaxSizeMsg" for="cMaxSize" errorStyle="color:red; display:block" styleClass="errorMessage"/>
-                    <h:outputText value="Deadline of Formation"></h:outputText>
+                    <h:outputText value="Deadline of Formation (yyyy-MM-dd)"></h:outputText>
                     <h:inputText id="cFormDeadline" value="#{teamParameterBean.formDeadline}" required="true" requiredMessage="Please enter the deadline of formation">
                     </h:inputText>
                     <h:message id="cFormDeadlineMsg" for="cFormDeadline" errorStyle="color:red; display:block" styleClass="errorMessage"/>
                     
                     </h:panelGrid>
                 <h:commandButton value="Set up" type="command"  actionListener="#{teamParameterBean.setParameter}">
-                   <f:ajax execute="cCode cMinSize cMaxSize cFormDeadline" 
-                           render="cCodeMsg cMinSizeMsg cMaxSizeMsg cFormDeadlineMsg"/>
+<!--                   <f:ajax execute="cCode cMinSize cMaxSize cFormDeadline" 
+                           render="cCodeMsg cMinSizeMsg cMaxSizeMsg cFormDeadlineMsg"/>-->
                 </h:commandButton>
                 <h:commandButton value="Reset" type="reset" />
                 
