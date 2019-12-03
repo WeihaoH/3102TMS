@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 filters\AuthenticationFilter.class
 persistence\UserAccount.class
 TMS\war\beans\SignInBean.class
@@ -9,5 +8,3 @@ persistence\UserTeamRelation_.class
 persistence\Team.class
 persistence\Team_.class
 persistence\UserAccount_.class
-=======
->>>>>>> Stashed changes
