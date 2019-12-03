@@ -26,6 +26,7 @@ import persistence.UserTeamRelation;
 @Named(value = "userTeamRelationBean")
 @RequestScoped
 public class UserTeamRelationBean {
+
     private String teamid;
     private String id;
     private String status;
@@ -46,7 +47,7 @@ public class UserTeamRelationBean {
     public void setId(String id) {
         this.id = id;
     }
-    
+
     @PersistenceContext(unitName = "TMS-PU")
     private EntityManager em;
     @Resource
@@ -73,7 +74,7 @@ public class UserTeamRelationBean {
      */
     public UserTeamRelationBean() {
     }
-    
+
     public void persist(Object object) {
         try {
             utx.begin();
@@ -84,47 +85,60 @@ public class UserTeamRelationBean {
             throw new RuntimeException(e);
         }
     }
-    
-    public void addMembertoTeam(String teamid, String userid){
+
+    public void addMembertoTeam(String teamid, String userid) {
         UserTeamRelation utr = new UserTeamRelation();
         utr.setUuid(UUID.randomUUID().toString());
         utr.setUserid(userid);
         utr.setTeamid(teamid);
         persist(utr);
     }
-    
-     public void addMembertoTeam(){
+
+    public void addMembertoTeam() {
         UserTeamRelation utr = new UserTeamRelation();
         utr.setUuid(UUID.randomUUID().toString());
         utr.setUserid(uid);
         utr.setTeamid(teamid);
         persist(utr);
-     }
-    
-        public void acceptStudent(String uId, String tId){
-        
-        try{
-        UserTeamRelation newJoin = new UserTeamRelation();
-        newJoin.setUuid(UUID.randomUUID().toString());
-        
-        //在前端显示并获取uid和teamid，放到这个bean的uid和teamid里
-        
-        addMembertoTeam(uId,tId);
-        setStatus("New Student accepted.");
+    }
+
+    public void acceptStudent(String uId, String tId) {
+
+        try {
+            UserTeamRelation newJoin = new UserTeamRelation();
+            newJoin.setUuid(UUID.randomUUID().toString());
+
+            //在前端显示并获取uid和teamid，放到这个bean的uid和teamid里
+            addMembertoTeam(uId, tId);
+            setStatus("New Student accepted.");
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", e);
             setStatus("Acceptence Faied.");
-            }
         }
-        
-        //不确定放在哪个bean里，先放在这儿
-        public void showTeamMembers(){
-            try{
-            Query query = em.createQuery("SELECT u FROM UserTeamRelation u WHERE u.teamid = '"+this.teamid+"'",UserTeamRelation.class);
+    }
+
+    //不确定放在哪个bean里，先放在这儿
+    public void showTeamMembers() {
+        try {
+            Query query = em.createQuery("SELECT u FROM UserTeamRelation u WHERE u.teamid = '" + this.teamid + "'", UserTeamRelation.class);
             List<UserAccount> sutInTeam = (List<UserAccount>) query.getResultList();
-            } catch (Exception e) {
+        } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", e);
-            }
         }
-   
+    }
+    
+    public boolean checkInTeam(String uid){
+        try {
+            Query query = em.createQuery(
+                "SELECT u FROM UserTeamRelation u" +
+                " WHERE u.userid = :userId");
+            query.setParameter("teamId",uid);
+            if (query.getSingleResult() != null) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return false;
+    }
 }
