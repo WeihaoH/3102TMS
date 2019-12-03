@@ -19,6 +19,9 @@
                     
                     <h:outputText value="Team Creation Date: " />
                     <h:outputText value="#{teamBean.teamInstance.creationDate}" />
+                    <h:form>
+                        <h:commandButton value ="Join" action="#{teamCandidaterBean.addMembertoTeam(teamBean.teamInstance.id)}"></h:commandButton>
+                    </h:form>
                 </h:panelGrid>
             </ui:define>
 

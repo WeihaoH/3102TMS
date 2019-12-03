@@ -11,9 +11,14 @@ import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import persistence.UserTeamRelation;
+import javax.persistence.Query;
+import javax.servlet.http.HttpSession;
+import persistence.TeamCandidaterRal;
+import persistence.TeamParameter;
+import persistence.UserAccount;
 
 /**
  *
@@ -64,11 +69,16 @@ public class TeamCandidaterBean {
         }
     }
 
-    public void addMembertoTeam(String teamid, String userid){
-        UserTeamRelation utr = new UserTeamRelation();
-        utr.setUuid(UUID.randomUUID().toString());
-        utr.setTeamid(teamid);
-        persist(utr);
+    public void addMembertoTeam(String teamid){
+        System.out.println("TCRBEAN"+ teamid);
+        TeamCandidaterRal tcr = new TeamCandidaterRal();
+        tcr.setUuid(UUID.randomUUID().toString());
+        tcr.setTeamid(teamid);
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        UserAccount userAcc = (UserAccount) session.getAttribute("Student");
+        tcr.setCandidaterid(userAcc.getUserId());
+        persist(tcr);
     }
+    
     
 }
