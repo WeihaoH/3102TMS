@@ -31,8 +31,9 @@
                     
                         <h:column>
                             <h:form>
-                                
-                                <h:commandButton value="Join" action="#{teamCandidaterBean.addtoCandidaterList}"></h:commandButton>
+                                <h:commandButton action="#{teamCandidaterBean.addtoCandidaterList()}"  value="Join">
+                                    <f:setPropertyActionListener target="#{teamCandidaterBean.teamid}" value="#{team.id}"/>
+                                </h:commandButton>
                             </h:form>
                         </h:column>
   

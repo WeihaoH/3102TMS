@@ -21,7 +21,7 @@ public class TeamCandidaterRal implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private String uuid;
     private String teamid;
     private String candidaterid;
 
@@ -40,19 +40,21 @@ public class TeamCandidaterRal implements Serializable {
     public String getTeamid() {
         return teamid;
     }
-    
-    public String getId() {
-        return id;
+
+    public String getUuid() {
+        return uuid;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
+    
+
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (uuid != null ? uuid.hashCode() : 0);
         return hash;
     }
 
@@ -63,7 +65,7 @@ public class TeamCandidaterRal implements Serializable {
             return false;
         }
         TeamCandidaterRal other = (TeamCandidaterRal) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.uuid == null && other.uuid != null) || (this.uuid != null && !this.uuid.equals(other.uuid))) {
             return false;
         }
         return true;
@@ -71,7 +73,7 @@ public class TeamCandidaterRal implements Serializable {
 
     @Override
     public String toString() {
-        return "persistence.TeamCandidaterRal[ id=" + id + " ]";
+        return "persistence.TeamCandidaterRal[ id=" + uuid + " ]";
     }
     
 }

@@ -11,12 +11,9 @@ import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.servlet.http.HttpSession;
-import persistence.TeamCandidaterRal;
-import persistence.UserAccount;
+import persistence.UserTeamRelation;
 
 /**
  *
@@ -25,8 +22,8 @@ import persistence.UserAccount;
 @Named(value = "teamCandidaterBean")
 @RequestScoped
 public class TeamCandidaterBean {
-
-    private String teamid;
+    private Long teamid;
+    private Long candidaterid;
     
     @PersistenceContext(unitName = "TMS-PU")
     private EntityManager em;
@@ -34,22 +31,28 @@ public class TeamCandidaterBean {
     private javax.transaction.UserTransaction utx;
 
 
-
-    public String getTeamid() {
+    public Long getTeamid() {
         return teamid;
     }
 
-    public void setTeamid(String teamid) {
+    public void setTeamid(Long teamid) {
         this.teamid = teamid;
     }
 
+    public Long getCandidaterid() {
+        return candidaterid;
+    }
+
+    public void setCandidaterid(Long candidaterid) {
+        this.candidaterid = candidaterid;
+    }
+
     /**
-     * Creates a new instance of TeamCandidaterBean
+     * Creates a new instance of UserTeamRelationBean
      */
     public TeamCandidaterBean() {
     }
     
-   
     public void persist(Object object) {
         try {
             utx.begin();
@@ -61,16 +64,14 @@ public class TeamCandidaterBean {
         }
     }
     
-    public void addtoCandidaterList(String teamId){
-        System.out.println("TMS.war.beans.TeamCandidaterBean.addtoCandidaterList()");
-        System.err.println(teamId);
-        TeamCandidaterRal tcr = new TeamCandidaterRal();
-        tcr.setId(UUID.randomUUID().toString());
-        tcr.setTeamid(teamId);
-        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-            UserAccount userAcc = (UserAccount)session.getAttribute("Student");
-            tcr.setCandidaterid(userAcc.getUserId());
-        persist(tcr);
+    
+    
+    public void addMembertoTeam(String teamid, String userid){
+        UserTeamRelation utr = new UserTeamRelation();
+        utr.setUuid(UUID.randomUUID().toString());
+        utr.setUserid(userid);
+        utr.setTeamid(teamid);
+        persist(utr);
     }
     
 }
