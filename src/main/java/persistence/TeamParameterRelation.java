@@ -13,23 +13,23 @@ import javax.persistence.Id;
 
 /**
  *
- * @author 73987
+ * @author apie
  */
 @Entity
-public class UserTeamRelation implements Serializable {
+public class TeamParameterRelation implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     private String uuid;
     private String teamid;
-    private String userid;
-
-    public String getUuid() {
+    private String parameterid;
+   
+    public String getId() {
         return uuid;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
+    public void setId(String id) {
+        this.uuid = id;
     }
 
     public String getTeamid() {
@@ -40,12 +40,12 @@ public class UserTeamRelation implements Serializable {
         this.teamid = teamid;
     }
 
-    public String getUserid() {
-        return userid;
+    public String getParameterid() {
+        return parameterid;
     }
 
-    public void setUserid(String userid) {
-        this.userid = userid;
+    public void setParameterid(String parameterid) {
+        this.parameterid = parameterid;
     }
     
     @Override
@@ -58,10 +58,10 @@ public class UserTeamRelation implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof UserTeamRelation)) {
+        if (!(object instanceof TeamParameterRelation)) {
             return false;
         }
-        UserTeamRelation other = (UserTeamRelation) object;
+        TeamParameterRelation other = (TeamParameterRelation) object;
         if ((this.uuid == null && other.uuid != null) || (this.uuid != null && !this.uuid.equals(other.uuid))) {
             return false;
         }
@@ -70,7 +70,7 @@ public class UserTeamRelation implements Serializable {
 
     @Override
     public String toString() {
-        return "persistence.UserTeamRelation[ id=" + uuid + " ]";
+        return "persistence.TeamParameterRelation[ id=" + uuid + " ]";
     }
     
 }

@@ -13,17 +13,31 @@ import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.UserTransaction;
+import persistence.TeamParameterRelation;
 import persistence.UserTeamRelation;
 
 /**
  *
- * @author 73987
+ * @author apie
  */
-@Named(value = "userTeamRelationBean")
+@Named(value = "teamParameterRelationBean")
 @RequestScoped
-public class UserTeamRelationBean {
+public class TeamParameterRelationBean {
+
+    
+    @PersistenceContext(unitName = "TMS-PU")
+    private EntityManager em;
+    @Resource
+    private javax.transaction.UserTransaction utx;
     private String teamid;
     private String id;
+    
+    /**
+     * Creates a new instance of TeamParameterRelationBean
+     */
+    public TeamParameterRelationBean() {
+    }
 
     public String getTeamid() {
         return teamid;
@@ -40,20 +54,31 @@ public class UserTeamRelationBean {
     public void setId(String id) {
         this.id = id;
     }
-    
-    @PersistenceContext(unitName = "TMS-PU")
-    private EntityManager em;
-    @Resource
-    private javax.transaction.UserTransaction utx;
 
+    public EntityManager getEm() {
+        return em;
+    }
 
+    public void setEm(EntityManager em) {
+        this.em = em;
+    }
 
-    /**
-     * Creates a new instance of UserTeamRelationBean
-     */
-    public UserTeamRelationBean() {
+    public UserTransaction getUtx() {
+        return utx;
+    }
+
+    public void setUtx(UserTransaction utx) {
+        this.utx = utx;
     }
     
+    public void addTeamToCourse(String teamid, String parameterId){
+        TeamParameterRelation tpr = new TeamParameterRelation();
+        tpr.setId(UUID.randomUUID().toString());
+        tpr.setParameterid(parameterId);
+        tpr.setTeamid(teamid);
+        persist(tpr);
+    }
+        
     public void persist(Object object) {
         try {
             utx.begin();
@@ -63,15 +88,5 @@ public class UserTeamRelationBean {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", e);
             throw new RuntimeException(e);
         }
-    }
-    
-    public void addMembertoTeam(String teamid, String userid){
-
-        UserTeamRelation utr = new UserTeamRelation();
-        utr.setUuid(UUID.randomUUID().toString());
-        utr.setUserid(userid);
-        utr.setTeamid(teamid);
-        persist(utr);
-    }
-   
+    }  
 }

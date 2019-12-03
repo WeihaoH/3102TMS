@@ -20,6 +20,8 @@ import javax.persistence.Query;
 import javax.servlet.http.HttpSession;
 import persistence.UserAccount;
 import TMS.war.beans.UserTeamRelationBean;
+import persistence.TeamParameter;
+import persistence.TeamParameterRelation;
 
 /**
  *
@@ -97,7 +99,16 @@ public class TeamBean {
             FacesContext facesContext = FacesContext.getCurrentInstance();
             UserTeamRelationBean userTeamRelationBean = (UserTeamRelationBean) facesContext.getApplication().createValueBinding("#{userTeamRelationBean}").getValue(facesContext);
             userTeamRelationBean.addMembertoTeam(team.getId(), userAcc.getUserId());
-
+            //我觉得需要加上Team-TeamParameter的relation
+            try {
+            Query query = em.createQuery("SELECT p FROM TeamParameter p WHERE p.courseCode = :courseCode",TeamParameter.class);
+            TeamParameter teamPara = (TeamParameter) query.setParameter("courseCode", courseCode).getSingleResult();
+            TeamParameterRelationBean teamParameterRelationBean = (TeamParameterRelationBean)facesContext.getApplication().createValueBinding("#{teamParameterRelationBean}").getValue(facesContext);
+            teamParameterRelationBean.addTeamToCourse(team.getId(),teamPara.getParameterId());    
+            } catch (Exception e) {
+            System.err.println(e);
+            }
+   
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", e);
             setStatus("Creation failed.");
