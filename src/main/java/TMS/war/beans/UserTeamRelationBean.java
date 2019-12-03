@@ -132,8 +132,8 @@ public class UserTeamRelationBean {
             Query query = em.createQuery(
                 "SELECT u FROM UserTeamRelation u" +
                 " WHERE u.userid = :userId");
-            query.setParameter("teamId",uid);
-            if (query.getSingleResult() != null) {
+            query.setParameter("userId",uid);
+            if (!query.getResultList().isEmpty()) {
                 return true;
             }
         } catch (Exception e) {
