@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    <h:panelGrid columns="3">
+                        <h:outputText value="Team name"></h:outputText>
+                        <h:inputText id="tname" value="#{teamBean.teamName}" required="true" requiredMessage="Please enter team name"/>
+                        <h:message id="tnMsg" for="tname" errorStyle="color:red; display:block"/>
+
+                        <h:outputText value="Liaison id"></h:outputText>
+                        <h:inputText id="lid" value="#{teamBean.liaisonId}" required="true" requiredMessage="Please enter liaison's id"/>
+                        <h:message id="lidMsg" for="lid" errorStyle="color:red; display:block"/>
+
+                        <h:outputText value="Course code"></h:outputText>
+                        <h:inputText id="ccode" value="#{teamBean.courseCode}" required="true" requiredMessage="Please enter team name"/>
+                        <h:message id="ccMsg" for="ccode" errorStyle="color:red; display:block"/>
+                    </h:panelGrid>
+
+                    <h:commandButton value="Create Team" type="command"  actionListener="#{teamBean.createTeam}">
+<!--                        <f:ajax execute="tname lid ccode" 
+                                render="tnMsg lidMsg ccMsg"/>-->
+                    </h:commandButton>
+                    <h:commandButton value="Cancel" type="reset" />
+                
+                    <hr/>
+                    <hr/>
+                    <h:outputText style="color:royalblue; font-size: large; font-weight: bold" id="createOutput" value="#{teamBean.status}"></h:outputText>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

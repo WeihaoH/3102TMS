@@ -1,16 +1,6 @@
-<<<<<<< Updated upstream
 C:\Users\73987\Desktop\3102TMS\src\main\java\persistence\UserTeamRelation.java
 C:\Users\73987\Desktop\3102TMS\src\main\java\TMS\war\beans\LoginBean.java
 C:\Users\73987\Desktop\3102TMS\src\main\java\persistence\UserAccount.java
 C:\Users\73987\Desktop\3102TMS\src\main\java\TMS\war\beans\SignInBean.java
 C:\Users\73987\Desktop\3102TMS\src\main\java\filters\AuthenticationFilter.java
-=======
-/Users/apie/GoogleDrive/Uottawa/CSI/SEG 3102/Project/D3/3102TMS/src/main/java/TMS/war/beans/SignInBean.java
-/Users/apie/GoogleDrive/Uottawa/CSI/SEG 3102/Project/D3/3102TMS/src/main/java/persistence/UserAccount.java
-/Users/apie/GoogleDrive/Uottawa/CSI/SEG 3102/Project/D3/3102TMS/src/main/java/persistence/UserTeamRelation.java
-/Users/apie/GoogleDrive/Uottawa/CSI/SEG 3102/Project/D3/3102TMS/src/main/java/TMS/war/beans/LoginBean.java
-/Users/apie/GoogleDrive/Uottawa/CSI/SEG 3102/Project/D3/3102TMS/src/main/java/filters/AuthenticationFilter.java
-/Users/apie/GoogleDrive/Uottawa/CSI/SEG 3102/Project/D3/3102TMS/src/main/java/persistence/TeamParameter.java
-/Users/apie/GoogleDrive/Uottawa/CSI/SEG 3102/Project/D3/3102TMS/src/main/java/TMS/war/beans/TeamBean.java
-/Users/apie/GoogleDrive/Uottawa/CSI/SEG 3102/Project/D3/3102TMS/src/main/java/persistence/Team.java
->>>>>>> Stashed changes
+

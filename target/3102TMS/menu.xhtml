@@ -15,11 +15,11 @@
                 <h:button outcome="/signIn" value="Sign Up"/>        
                 <c:choose>
                 <c:when test="${ sessionScope.Student != null }">
-                     <h:button outcome="/student/operationInterface" value="Student User Menu"/>
-                </c:when>
+                    <h:button outcome="/student/operationInterface" value="Student User Menu"/>
+                </c:when>
                 <c:when test="${ sessionScope.Teacher != null }">
-                     <h:button outcome="/teacher/operationInterface" value="teacher User Menu"/>
-                </c:when>
+                    <h:button outcome="/teacher/operationInterface" value="teacher User Menu"/>
+                </c:when>
                 <c:otherwise>
                     <h:button outcome="/student/operationInterface" value="User Menu"/>
                 </c:otherwise>
