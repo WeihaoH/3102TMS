@@ -6,11 +6,12 @@
 package TMS.war.beans;
 
 import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import persistence.Team;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
+import java.io.Serializable;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.faces.context.FacesContext;
@@ -19,25 +20,34 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.servlet.http.HttpSession;
 import persistence.UserAccount;
+import persistence.TeamParameter;
 import TMS.war.beans.UserTeamRelationBean;
 import persistence.TeamParameter;
 import persistence.TeamParameterRelation;
+
 
 /**
  *
  * @author RoyLiu
  */
 @Named(value = "teamBean")
-@RequestScoped
-public class TeamBean {
-
+@SessionScoped
+public class TeamBean implements Serializable{
+    private static final long serialVersionUID = 1L;
+    
     @PersistenceContext(unitName = "TMS-PU")
     private EntityManager em;
     @Resource
     private javax.transaction.UserTransaction utx;
     private String status;
+    // For find all teams
     private List<Team> teams;
-
+    //For team and user query
+    private Team teamInstance;
+    private List<UserAccount> members;
+    private List<UserAccount> candidates;
+    private List<TeamParameter> parameters;
+    //For team creation form
     private String teamName;
     private String liaisonId;
     private String courseCode;
@@ -88,6 +98,14 @@ public class TeamBean {
         this.courseCode = courseCode;
     }
 
+    public Team getTeamInstance() {
+        return teamInstance;
+    }
+
+    public void setTeamInstance(Team teamInstance) {
+        this.teamInstance = teamInstance;
+    }
+
     public void createTeam() {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         UserAccount userAcc = (UserAccount) session.getAttribute("Student");
@@ -120,6 +138,21 @@ public class TeamBean {
             System.err.println(e);
         }
         return "viewTeams";
+    }
+    
+    public String getTeamDetails(String teamId){
+        try {
+            Query query = em.createQuery(
+                "SELECT t FROM Team t" +
+                " WHERE t.teamId = :teamId");
+            query.setParameter("teamId",teamId);
+            setTeamInstance((Team)query.getSingleResult());
+            // find members and candidates and parameters
+            System.out.println(getTeamInstance().toString());
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return "teamInfo";
     }
 
     public void persist(Object object) {

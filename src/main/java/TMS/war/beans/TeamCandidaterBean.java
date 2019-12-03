@@ -63,7 +63,6 @@ public class TeamCandidaterBean {
             throw new RuntimeException(e);
         }
     }
-    
 
     public void addMembertoTeam(String teamid, String userid){
         UserTeamRelation utr = new UserTeamRelation();
