@@ -65,8 +65,6 @@ public class UserTeamRelationBean {
         }
     }
     
-    
-    
     public void addMembertoTeam(String teamid, String userid){
 
         UserTeamRelation utr = new UserTeamRelation();
@@ -75,5 +73,5 @@ public class UserTeamRelationBean {
         utr.setTeamid(teamid);
         persist(utr);
     }
-    
+   
 }

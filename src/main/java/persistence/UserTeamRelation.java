@@ -48,9 +48,6 @@ public class UserTeamRelation implements Serializable {
         this.userid = userid;
     }
     
-
- 
-
     @Override
     public int hashCode() {
         int hash = 0;
