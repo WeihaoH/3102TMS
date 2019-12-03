@@ -3,8 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
@@ -14,28 +13,15 @@
                 <h:panelGrid columns="2">
                     <h:outputText value="Team Id: " />
                     <h:outputText value="#{teamBean.teamInstance.id}" />
-
+                    
                     <h:outputText value="Team Name: " />
                     <h:outputText value="#{teamBean.teamInstance.teamName}" />
-
+                    
                     <h:outputText value="Team Creation Date: " />
                     <h:outputText value="#{teamBean.teamInstance.creationDate}" />
-
-                    <c:choose>
-                        <c:when test="#{!userTeamRelationBean.checkInTeam(sessionScope.Student.userId)}">
-                            <h:form>
-                                <h:commandButton value ="Join" action="#{teamCandidaterBean.addMembertoTeam(teamBean.teamInstance.id)}"></h:commandButton>
-                            </h:form>
-                        </c:when>
-                    </c:choose>
-                    
-                    <c:choose>
-                       <!-- check if this user is liaison-->
-                       <c:when test="${ true }" > 
-<!--                           show the candidate table-->
-                       </c:when>
-                    </c:choose>
-
+                    <h:form>
+                        <h:commandButton value ="Join" action="#{teamCandidaterBean.addMembertoTeam(teamBean.teamInstance.id)}"></h:commandButton>
+                    </h:form>
                 </h:panelGrid>
             </ui:define>
 

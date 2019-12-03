@@ -83,18 +83,5 @@ public class TeamCandidaterBean implements Serializable{
         persist(tcr);
     }
     
-    public boolean checkInCandidates(String uid){
-        try {
-            Query query = em.createQuery(
-                "SELECT u FROM UserTeamRelation u" +
-                " WHERE u.userid = :userId");
-            query.setParameter("teamId",uid);
-            if (query.getSingleResult() != null) {
-                return true;
-            }
-        } catch (Exception e) {
-            System.err.println(e);
-        }
-        return false;
-    }
+    
 }
