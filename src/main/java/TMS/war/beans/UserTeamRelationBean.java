@@ -135,6 +135,9 @@ public class UserTeamRelationBean implements Serializable{
             if (!query.getResultList().isEmpty()) {
                 return true;
             }
-        }
+        } catch (Exception e) {
+            System.err.println(e);
+        } 
         return false;
+    }
 }
