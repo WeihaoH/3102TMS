@@ -99,13 +99,11 @@ public class UserTeamRelationBean implements Serializable{
         public void acceptStudent(String tId,String uId){
         addMembertoTeam(tId,uId);
         try{
-            Query query = em.createNativeQuery(
-                "DELETE FROM TeamCandidaterRal t" +
-                " WHERE t.teamid = :teamId AND t.candidaterid = candidaterId");
-            query.setParameter("teamId",tId);
-            query.setParameter("candidaterId",uId);
-            query.executeUpdate();           
-                         
+            utx.begin();
+            Query query = em.createQuery(
+                "DELETE FROM TeamCandidaterRal t WHERE t.teamid = :teamId AND t.candidaterid = :candidaterId");
+            query.setParameter("teamId",tId).setParameter("candidaterId", uId).executeUpdate();           
+            utx.commit();           
        
         setStatus("New Student accepted.");
         } catch (Exception e) {
