@@ -13,9 +13,13 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.servlet.http.HttpSession;
+import persistence.UserAccount;
+import TMS.war.beans.UserTeamRelationBean;
 
 /**
  *
@@ -87,10 +91,21 @@ public class TeamBean {
         try {
             persist(team);
             setStatus("Created.");
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+            UserAccount userAcc = (UserAccount)session.getAttribute("Student");
+            System.out.println(userAcc.getUserId());
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            UserTeamRelationBean userTeamRelationBean = (UserTeamRelationBean)facesContext.getApplication().createValueBinding("#{userTeamRelationBean}").getValue(facesContext);
+            userTeamRelationBean.addMembertoTeam(team.getId(), userAcc.getUserId());
+
+            
         } catch (Exception e){
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", e);
             setStatus("Creation failed.");
         }
+        
+        
+        
     }
     
     public String findAllTeams(){
