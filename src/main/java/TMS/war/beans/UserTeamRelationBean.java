@@ -5,13 +5,14 @@
  */
 package TMS.war.beans;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -24,8 +25,8 @@ import persistence.UserTeamRelation;
  * @author 73987
  */
 @Named(value = "userTeamRelationBean")
-@RequestScoped
-public class UserTeamRelationBean {
+@SessionScoped
+public class UserTeamRelationBean implements Serializable{
     private String teamid;
     private String id;
     private String status;
