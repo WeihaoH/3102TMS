@@ -123,7 +123,18 @@ public class UserTeamRelationBean implements Serializable{
             List<UserAccount> sutInTeam = (List<UserAccount>) query.getResultList();
             } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", e);
+        }
+    }
+    
+    public boolean checkInTeam(String uid){
+        try {
+            Query query = em.createQuery(
+                "SELECT u FROM UserTeamRelation u" +
+                " WHERE u.userid = :userId");
+            query.setParameter("userId",uid);
+            if (!query.getResultList().isEmpty()) {
+                return true;
             }
         }
-   
+        return false;
 }
