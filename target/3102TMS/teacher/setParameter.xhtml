@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./../template.xhtml">
+
+        <ui:define name="content">
+                <h1>Set up parameter...</h1>
+                <f:view>
+                    <h:form>
+                    <h:panelGrid columns="3">
+                    <h:outputText value="Course Code"></h:outputText>
+                    <h:inputText id="cCode" value="#{teamParameterBean.courseCode}" required="true" requiredMessage="Please enter Course Code">
+                    </h:inputText>
+                    <h:message id="cCodeMsg" for="cCode" errorStyle="color:red; display:block"/>
+                    <h:outputText value="Minimum Size of Team"></h:outputText>
+                    <h:inputText id="cMinSize" value="#{teamParameterBean.minSizeOfTeam}" required="true" requiredMessage="Please enter the Minimum Size of Team">
+                    </h:inputText>
+                    <h:message id="cMinSizeMsg" for="cMinSize" errorStyle="color:red; display:block" styleClass="errorMessage"/>
+                    <h:outputText value="Maximum Size of Team"></h:outputText>
+                    <h:inputText id="cMaxSize" value="#{teamParameterBean.maxSizeOfTeam}" required="true" requiredMessage="Please enter the Maximum Size of Team">
+                    </h:inputText>
+                    <h:message id="cMaxSizeMsg" for="cMaxSize" errorStyle="color:red; display:block" styleClass="errorMessage"/>
+                    <h:outputText value="Deadline of Formation (yyyy-MM-dd)"></h:outputText>
+                    <h:inputText id="cFormDeadline" value="#{teamParameterBean.formDeadline}" required="true" requiredMessage="Please enter the deadline of formation">
+                    </h:inputText>
+                    <h:message id="cFormDeadlineMsg" for="cFormDeadline" errorStyle="color:red; display:block" styleClass="errorMessage"/>
+                    
+                    </h:panelGrid>
+                <h:commandButton value="Set up" type="command"  actionListener="#{teamParameterBean.setParameter}">
+<!--                   <f:ajax execute="cCode cMinSize cMaxSize cFormDeadline" 
+                           render="cCodeMsg cMinSizeMsg cMaxSizeMsg cFormDeadlineMsg"/>-->
+                </h:commandButton>
+                <h:commandButton value="Reset" type="reset" />
+                
+                <div>
+                    <hr/>
+                    <hr/>
+                <h:outputText  style="color:royalblue; font-size: large; font-weight: bold" id="status" value="#{teamParameterBean.status}"/> 
+                </div>
+                    </h:form>
+                </f:view>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

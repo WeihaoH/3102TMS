@@ -20,41 +20,21 @@ public class UserTeamRelation implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    private String uuid;
-    private String teamid;
-    private String userid;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    public String getUuid() {
-        return uuid;
+    public Long getId() {
+        return id;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
+    public void setId(Long id) {
+        this.id = id;
     }
-
-    public String getTeamid() {
-        return teamid;
-    }
-
-    public void setTeamid(String teamid) {
-        this.teamid = teamid;
-    }
-
-    public String getUserid() {
-        return userid;
-    }
-
-    public void setUserid(String userid) {
-        this.userid = userid;
-    }
-    
-
- 
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (uuid != null ? uuid.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -65,7 +45,7 @@ public class UserTeamRelation implements Serializable {
             return false;
         }
         UserTeamRelation other = (UserTeamRelation) object;
-        if ((this.uuid == null && other.uuid != null) || (this.uuid != null && !this.uuid.equals(other.uuid))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -73,7 +53,7 @@ public class UserTeamRelation implements Serializable {
 
     @Override
     public String toString() {
-        return "persistence.UserTeamRelation[ id=" + uuid + " ]";
+        return "persistence.UserTeamRelation[ id=" + id + " ]";
     }
     
 }
