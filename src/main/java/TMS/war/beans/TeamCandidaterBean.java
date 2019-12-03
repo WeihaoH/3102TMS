@@ -6,6 +6,7 @@
 package TMS.war.beans;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,7 +33,15 @@ public class TeamCandidaterBean implements Serializable{
     
     private String teamid;
     private String candidaterid;
-    
+    private List<TeamCandidaterRal> candidaters;
+
+    public List<TeamCandidaterRal> getCandidaters() {
+        return candidaters;
+    }
+
+    public void setCandidaters(List<TeamCandidaterRal> candidaters) {
+        this.candidaters = candidaters;
+    }
     @PersistenceContext(unitName = "TMS-PU")
     private EntityManager em;
     @Resource
@@ -81,6 +90,26 @@ public class TeamCandidaterBean implements Serializable{
         UserAccount userAcc = (UserAccount) session.getAttribute("Student");
         tcr.setCandidaterid(userAcc.getUserId());
         persist(tcr);
+    }
+    
+        public String findAllCandidater(String teamid){
+        try {
+            
+            
+            System.out.println("TCRBEAN find"+ teamid);            
+            Query query = em.createQuery(
+                "SELECT t FROM TeamCandidaterRal t" +
+                " WHERE t.teamid = :teamId");
+            query.setParameter("teamId",teamid);
+            setCandidaters((List<TeamCandidaterRal>)query.getResultList());
+                        
+            setTeamid(teamid);
+            
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", e);
+            System.err.println(e);
+        }
+        return "candidateList";
     }
     
     

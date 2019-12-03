@@ -22,6 +22,12 @@
                     <h:form>
                         <h:commandButton value ="Join" action="#{teamCandidaterBean.addMembertoTeam(teamBean.teamInstance.id)}"></h:commandButton>
                     </h:form>
+                    
+                    <h:form>
+                        <h:commandButton value="Details" action="#{teamCandidaterBean.findAllCandidater(teamBean.teamInstance.id)}"/>
+                    </h:form>
+                    
+                    
                 </h:panelGrid>
             </ui:define>
 
