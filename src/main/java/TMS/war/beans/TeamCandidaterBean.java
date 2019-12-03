@@ -11,9 +11,12 @@ import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.servlet.http.HttpSession;
 import persistence.TeamCandidaterRal;
+import persistence.UserAccount;
 
 /**
  *
@@ -24,15 +27,6 @@ import persistence.TeamCandidaterRal;
 public class TeamCandidaterBean {
 
     private String teamid;
-    private String candidaterid;
-
-    public String getCandidaterid() {
-        return candidaterid;
-    }
-
-    public void setCandidaterid(String candidaterid) {
-        this.candidaterid = candidaterid;
-    }
     
     @PersistenceContext(unitName = "TMS-PU")
     private EntityManager em;
@@ -67,11 +61,15 @@ public class TeamCandidaterBean {
         }
     }
     
-    public void addtoCandidaterList(){
+    public void addtoCandidaterList(String teamId){
+        System.out.println("TMS.war.beans.TeamCandidaterBean.addtoCandidaterList()");
+        System.err.println(teamId);
         TeamCandidaterRal tcr = new TeamCandidaterRal();
         tcr.setId(UUID.randomUUID().toString());
-        tcr.setCandidaterid(candidaterid);
-        tcr.setTeamid(teamid);
+        tcr.setTeamid(teamId);
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+            UserAccount userAcc = (UserAccount)session.getAttribute("Student");
+            tcr.setCandidaterid(userAcc.getUserId());
         persist(tcr);
     }
     

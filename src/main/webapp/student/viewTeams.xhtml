@@ -18,14 +18,24 @@
                             <f:facet name = "header">Team Id</f:facet>
                             <h:outputText value="#{team.id}"/>
                         </h:column>
+                    
                         <h:column>
                             <f:facet name = "header">Creation Date</f:facet>
                             <h:outputText value="#{team.creationDate}"/>
                         </h:column>
+                    
                         <h:column>
                             <f:facet name = "header">Full</f:facet>
                             <h:outputText value="#{team.isFull}"/>
                         </h:column>
+                    
+                        <h:column>
+                            <h:form>
+                                
+                                <h:commandButton value="Join" action="#{teamCandidaterBean.addtoCandidaterList}"></h:commandButton>
+                            </h:form>
+                        </h:column>
+  
                     </h:dataTable>
             </ui:define>
 
