@@ -115,7 +115,7 @@ public class LoginBean {
         // invalidate session to remove User
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         session.invalidate();
-        FacesContext.getCurrentInstance().getExternalContext().redirect("/TMS-web/faces/index.xhtml");
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/3102TMS/faces/index.xhtml");
         // navigate to index - see faces-config.xml for navigation rules
         return "logout";
     }

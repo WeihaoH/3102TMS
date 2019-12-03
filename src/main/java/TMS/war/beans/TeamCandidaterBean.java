@@ -22,8 +22,8 @@ import persistence.UserTeamRelation;
 @Named(value = "teamCandidaterBean")
 @RequestScoped
 public class TeamCandidaterBean {
-    private Long teamid;
-    private Long candidaterid;
+    private String teamid;
+    private String candidaterid;
     
     @PersistenceContext(unitName = "TMS-PU")
     private EntityManager em;
@@ -31,19 +31,19 @@ public class TeamCandidaterBean {
     private javax.transaction.UserTransaction utx;
 
 
-    public Long getTeamid() {
+    public String getTeamid() {
         return teamid;
     }
 
-    public void setTeamid(Long teamid) {
+    public void setTeamid(String teamid) {
         this.teamid = teamid;
     }
 
-    public Long getCandidaterid() {
+    public String getCandidaterid() {
         return candidaterid;
     }
 
-    public void setCandidaterid(Long candidaterid) {
+    public void setCandidaterid(String candidaterid) {
         this.candidaterid = candidaterid;
     }
 
@@ -66,10 +66,10 @@ public class TeamCandidaterBean {
     
     
     
-    public void addMembertoTeam(String teamid, String userid){
+    public void addMembertoTeam(){
+        System.out.println("We are here");
         UserTeamRelation utr = new UserTeamRelation();
         utr.setUuid(UUID.randomUUID().toString());
-        utr.setUserid(userid);
         utr.setTeamid(teamid);
         persist(utr);
     }
